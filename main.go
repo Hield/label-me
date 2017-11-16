@@ -18,6 +18,8 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
 
+	router.Static("/app", "frontend")
+
 	router.GET("/api/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "holahola",
