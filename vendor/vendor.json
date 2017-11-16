@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "QeKwBtN2df+j+4stw3bQJ6yO4EY=",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae",
+			"revisionTime": "2017-01-09T09:34:21Z"
+		},
+		{
 			"checksumSHA1": "R0LBBVbvtiuJm/U4Ur0Bp9LbGNM=",
 			"path": "github.com/gin-gonic/gin",
 			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
