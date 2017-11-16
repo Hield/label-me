@@ -9,6 +9,12 @@
 			"revisionTime": "2017-01-09T09:34:21Z"
 		},
 		{
+			"checksumSHA1": "WBCkV1yTg/nbmiEcQ9Q3iW93a5o=",
+			"path": "github.com/gin-contrib/static",
+			"revision": "e6b7eb92648d0a5faeea81700668a7a5dbe8424f",
+			"revisionTime": "2017-09-17T02:08:54Z"
+		},
+		{
 			"checksumSHA1": "R0LBBVbvtiuJm/U4Ur0Bp9LbGNM=",
 			"path": "github.com/gin-gonic/gin",
 			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
