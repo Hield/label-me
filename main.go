@@ -19,10 +19,9 @@ func main() {
 	router.Use(gin.Logger())
 
 	router.GET("/api/", func(c *gin.Context) {
-		c.JSON(200, `
-		{
-			"test": "hola"	
-		}`)
+		c.JSON(200, gin.H{
+			"message": "holahola",
+		})
 	})
 	router.Run(":" + port)
 }
