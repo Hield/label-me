@@ -1,0 +1,67 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "QeKwBtN2df+j+4stw3bQJ6yO4EY=",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae",
+			"revisionTime": "2017-01-09T09:34:21Z"
+		},
+		{
+			"checksumSHA1": "R0LBBVbvtiuJm/U4Ur0Bp9LbGNM=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
+			"revisionTime": "2017-11-12T05:56:59Z"
+		},
+		{
+			"checksumSHA1": "M3iXOKdjG7gGxMpQPMI49uqsaQU=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
+			"revisionTime": "2017-11-12T05:56:59Z"
+		},
+		{
+			"checksumSHA1": "woO1qIxIeQ1bcbPSiMfAKk3r4xg=",
+			"path": "github.com/gin-gonic/gin/json",
+			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
+			"revisionTime": "2017-11-12T05:56:59Z"
+		},
+		{
+			"checksumSHA1": "O+2Q4Uc9Vidvc/ctORliL315ZVI=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "ae9f03e6e80212e45427f811683f2a512cc8f506",
+			"revisionTime": "2017-11-12T05:56:59Z"
+		},
+		{
+			"checksumSHA1": "yqF125xVSkmfLpIVGrLlfE05IUk=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
+			"revisionTime": "2017-11-13T18:07:20Z"
+		},
+		{
+			"checksumSHA1": "w5RcOnfv5YDr3j2bd1YydkPiZx4=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c",
+			"revisionTime": "2017-11-07T05:05:31Z"
+		},
+		{
+			"checksumSHA1": "xYH6CRaqA5a7eO6f6guEuhrW7g8=",
+			"path": "github.com/ugorji/go/codec",
+			"revision": "649a5588a82cf604df7624361b11532a7b72a4a7",
+			"revisionTime": "2017-11-14T22:17:15Z"
+		},
+		{
+			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "5f1438d3fca68893a817e4a66806cea46a9e4ebf",
+			"revisionTime": "2017-07-30T05:02:35Z"
+		},
+		{
+			"checksumSHA1": "RDJpJQwkF012L6m/2BJizyOksNw=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "eb3733d160e74a9c7e442f435eb3bea458e1d19f",
+			"revisionTime": "2017-08-12T16:00:11Z"
+		}
+	],
+	"rootPath": "github.com/Hield/label-me"
+}
