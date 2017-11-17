@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/narrow-jumbotron/narrow-jumbotron.css">
 
     <!-- Vue.js -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>-->
 </head>
 
 <body>
@@ -32,15 +32,18 @@
         <header class="header clearfix">
         <nav>
             <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="#home">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#sentences">Sentences</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#users">Users</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sentences">Sentences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#answers">Answers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#users">Users</a>
+                </li>
             </ul>
         </nav>
         <h3 class="text-muted">LabelMe For Admin</h3>
@@ -73,6 +76,29 @@
                 </form>
             </div>
 
+            <div id="view-answers" class="app-view">
+                <h1>Answers</h1>
+                <h2>Add<h2>
+                <form id="add-answer">
+                    <div class="form-group">
+                         <label for="sentence-id">Sentence ID</label>
+                        <input class="form-control" id="sentence-id" type="text">
+                    </div>
+                    <div class="form-group">
+                         <label for="a-label">Label (Empty if none)</label>
+                        <input class="form-control" id="a-label" type="text">
+                    </div>
+                    <div class="form-group">
+                         <label for="feedback">Feedback (Empty if none)</label>
+                        <input class="form-control" id="feedback" type="text">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" id="is-skipped">Is Skipped</label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+
             <div id="view-users" class="app-view">
                 <h1>Users</h1>
             </div>
@@ -85,11 +111,17 @@
         </footer>
 
     </div>
-    <!-- Test script -->
+    <!-- Test script for checking endpoints -->
     <script>
-        // Start by hiding all the view and show only the main one
+        // Start by hiding all the view and show only the chosen one
         $(".app-view").hide();
-        $("#view-home").show();
+        if (location.hash == "") {
+            $("#view-home").show();
+        } else {
+            $(location.hash.replace(/^#/, '#view-')).show();
+            $(".nav-link.active").removeClass("active");
+            $("a[href='" + location.hash +"']").addClass("active")
+        }
 
         // Change active in the nav
         $(".nav-link").on("click", function(){
@@ -103,10 +135,12 @@
             $(location.hash.replace(/^#/, '#view-')).show();
         });
 
+        // Add sentence action
         $("#add-sentence").submit(function(e){
             e.preventDefault();
             var content = $("#content").val();
             var label = $("#label").val();
+            $("#add-sentence").trigger("reset");
             // Call to the endpoint
             $.ajax({
                 method: "POST",
@@ -115,14 +149,41 @@
                 data: JSON.stringify({
                     content: content,
                     label: label
-                }),
-                dataType: "json"
+                })
             })
                 .done(function(){
                     console.log("success");
                 })
                 .fail(function(){
                     console.log("fail");
+                })
+        })
+
+        // Add answer action
+        $("#add-answer").submit(function(e){
+            e.preventDefault();
+            var sentenceID = $("#sentence-id").val();
+            var label = $("#a-label").val();
+            var feedback = $("#feedback").val();
+            var isSkipped = $("#is-skipped").is(":checked");
+            $("#add-answer").trigger("reset");
+            // Call to the endpoint
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "../api/answers",
+                data: JSON.stringify({
+                    sentenceID: sentenceID,
+                    label: label,
+                    feedback: feedback,
+                    isSkipped: isSkipped,
+                })
+            })
+                .done(function() {
+                    console.log("success adding answer");
+                })
+                .fail(function() {
+                    console.log("fail adding asnwer");
                 })
         })
     </script>

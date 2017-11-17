@@ -26,17 +26,20 @@ func Main() {
 	// Create the router
 	router := gin.New()
 	router.Use(gin.Logger())
+
+	// The static HTML pages
 	router.StaticFile("/", "index.html")
 	router.StaticFile("/admin", "admin.html")
 	router.Static("/app", "frontend")
 
-	router.GET("/api/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "holahola",
-		})
-	})
-
-	router.POST("/api/sentences", handlers.AddSentence)
+	// The API
+	apiRouter := router.Group("/api")
+	// Sentences
+	apiRouter.POST("/sentences", handlers.AddSentence)
+	apiRouter.GET("/sentences", handlers.GetSentences)
+	apiRouter.GET("/sentences/positive", handlers.GetMostPositiveSentences)
+	// Answers
+	apiRouter.POST("/answers", handlers.AddAnswer)
 
 	router.Run(":" + port)
 }

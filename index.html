@@ -18,8 +18,28 @@
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/narrow-jumbotron/narrow-jumbotron.css">
 
     <!-- Vue.js -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <!-- Test style. Should be separated to a new file -->
+    <style>
+        #sentence-box {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        #button-box {
+            margin-bottom: 30px;
+        }
+        #sentence {
+            margin: 0px;
+            padding: 0px;
+        }
+        #retry-btn {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,15 +49,15 @@
         <header class="header clearfix">
         <nav>
             <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact">Contact</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
             </ul>
         </nav>
         <h3 class="text-muted">LabelMe</h3>
@@ -46,38 +66,78 @@
         <!-- Main -->
         <main role="main">
 
-            <div class="jumbotron">
-                <h1 class="display-3">Some introduction</h1>
-                <p class="lead">LabelMe is something something</p>
-                <p><a class="btn btn-lg btn-success" href="#" role="button">Try it now</a></p>
-            </div>
-
-            <!-- Example of row
-            <div class="row marketing">
-                <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-                </div>
-
-                <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            <div id="view-home" class="app-view">
+                <div class="jumbotron">
+                    <h1 class="display-3">We are SOSAD!</h1>
+                    <p class="lead">A game for science</p>
+                    <p><a id ="start-btn" class="btn btn-lg btn-success game-start-btn" href="#game" role="button">Try it now</a></p>
                 </div>
             </div>
-            End row -->
 
+            <div id="view-about" class="app-view">
+                <h1>About</h1>
+                <p>We are SOSAD
+                </p>
+            </div>
+
+            <div id="view-contact" class="app-view">
+                <h1>Contact</h1>
+            </div>
+
+            <!-- Game View -->
+            <div id="view-game" class="app-view">
+                <div id="sentence-box">
+                    <p id="sentence" data-id="">Test</p>
+                </div>
+                <div class="row" id="button-box">
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-danger btn-block" data-label="-2">S.negative</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-warning btn-block" data-label="-1">Negative</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-default btn-block" data-label="0">Neutral</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-info btn-block" data-label="1">Positive</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-primary btn-block" data-label="2">S.positive</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn label-btn btn-block" data-label="skip">Skip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- After game view -->
+            <div id="view-report" class="app-view">
+                <h1>Report</h1>
+                <p>Some facts here</p>
+                <p>Top 10 positive sentences</p>
+                <table id="report-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <!--<th>Sentence ID</th>-->
+                            <th>Sentence</th>
+                            <th>Number of labels</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(index, sentence) in sentences">
+                            <td>{{ index + 1 }}</td>
+                            <!--<td>{{ sentence.id }}</td>-->
+                            <td>{{ sentence.content }}</td>
+                            <td>{{ sentence.count }}</td>
+                            <td>{{ sentence.score }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="retry-btn" class="btn game-start-btn">Retry?</button>
+            </div>
         </main>
 
         <!-- Footer -->
@@ -88,38 +148,116 @@
     </div>
     <!-- Test script -->
     <script>
-        $.ajax({
-            url: "/api/",
-            success: function(result) {
-                $("#test").html(result.message);
-            }
-        })
-        const NotFound = { template: '<p>Page not found</p>'}
-        const Home = { template: '<p>home page</p>' }
-        const About = { template: '<p>about page</p>' }
-
-        const routes = {
-            '/': Home,
-            '/about': About
+        // Start by hiding all the view and show only the chosen one
+        $(".app-view").hide();
+        if (location.hash == "" || location.hash == "#") {
+            $("#view-home").show();
+        } else if (location.hash == "#game") {
+            $(".nav-link.active").removeClass("active");
+            $("#view-game").show();
+            getSentences();
+        } else {
+            $(location.hash.replace(/^#/, '#view-')).show();
+            $(".nav-link.active").removeClass("active");
+            $("a[href='" + location.hash +"']").addClass("active")
         }
 
-        new Vue({
-            el: '#app',
-            data: {
-                currentRoute: window.location.pathname
-            },
-            computed: {
-                ViewComponent () {
-                    return routes[this.currentRoute] || NotFound
-                }
-            },
-            render (h) {
-                return h(this.ViewComponent)
-            }
+        // Change active in the nav
+        $(".nav-link").on("click", function(){
+            $(".nav-link.active").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        // Check if location change
+        $(window).on('hashchange', function (e){
+            $(".app-view").hide();
+            $(location.hash.replace(/^#/, '#view-')).show();
+        });
+
+        // Global variables for the set of sentences
+        var sentences = [];
+        // The position of the current sentence
+        var index = 0;
+
+        // Get sentences and display them
+        function getSentences() {
+            $.ajax({
+                url: "api/sentences?n=5",
+            })
+                .done(function(data){
+                    $("#sentence").html(data[0].content);
+                    $("#sentence").attr("data-id", data[0].id);
+                    sentences = data;
+                })
+                .fail(function(){
+                    console.log("Error getting sentences");
+                })
+        }
+
+        // Start game
+        $(".game-start-btn").on("click", function(){
+            getSentences();
+        });
+
+        // When label button is clicked
+        $(".label-btn").on("click", function(){
+            var sentenceID = $("#sentence").attr("data-id");
+            var label = $(this).attr("data-label");
+            var isSkipped = $(this).attr("data-label") == "skip";
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "../api/answers",
+                data: JSON.stringify({
+                    sentenceID: sentenceID,
+                    label: label,
+                    feedback: "",
+                    isSkipped: isSkipped
+                })
+            })
+            index++;
+            if (index == 5) {
+                // Reset the five sentences here
+                // Should go the report page
+                index = 0;
+                $(".app-view").hide();
+                reportTable.update();
+                $("#view-report").show();
+                return
+            }      
+            $("#sentence").html(sentences[index].content);
+            $("#sentence").attr("data-id", sentences[index].id);
         })
 
-        window.addEventListener('popstate', () => {
-            app.currentRoute = window.location.pathname
+        // Retry button
+        $("#retry-btn").on("click", function(){
+            $("#view-report").hide();
+            $("#view-game").show();
+            getSentences();
+        })
+
+        // Report table
+        var reportTable = new Vue({
+            el: "#report-table",
+            data: {
+                sentences: []
+            },
+            methods: {
+                update: function() {
+                    $.ajax({
+                        url: "api/sentences/positive"
+                    })
+                        .done(function(data){
+                            data.forEach(function(sentence){
+                                sentence.score = sentence.score.toFixed(2);
+                            });
+                            reportTable.sentences = data;
+                        })
+                        .fail(function(){
+                            console.log("fail to get most positive sentences");
+                        })
+                }
+            }
         })
     </script>
 </body>
