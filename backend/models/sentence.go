@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"log"
 
 	"github.com/Hield/label-me/backend/global"
 )
@@ -97,7 +96,6 @@ func GetMostPositiveSentences() (sentences []LabeledSentece, err error) {
 			&sentence.Count,
 			&sentence.Score,
 		)
-		log.Println(sentence.Score)
 		if err != nil {
 			return
 		}
