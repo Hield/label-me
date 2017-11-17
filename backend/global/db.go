@@ -41,6 +41,9 @@ func SetupDB() (err error) {
 			FOREIGN KEY (sentence_id) REFERENCES sentences(id) ON DELETE CASCADE
 		)
 	`)
+	if err != nil {
+		return
+	}
 
 	// Create the aggregated view for sentences
 	// Overwrite everytime because it's view
